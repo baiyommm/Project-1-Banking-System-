@@ -5,6 +5,9 @@
 #include <iomanip> // Formatting
 using namespace std;
 
+// Function Header for various Bank Accounts: Checking vs Savings vs Business
+void handleAccount(int accountType, double &balance);
+
 int main() {
 
     // code for random number generator
@@ -23,4 +26,34 @@ int main() {
     cin >> balance;
     
     return 0;
+}
+
+    // Function for various Bank Accounts: Checking vs Savings vs Business
+void handleAccount(int accountType, double &balance) {
+    double amount;
+    double withdrawalFee;
+    double interestRate;
+    double minBalance;
+    
+    // Switch function to handle account types
+    switch(accountType) {
+        case 1: // Checking Account
+            withdrawalFee = 1.00;
+            interestRate = 0.01;
+            minBalance = 0.0; // No minimum balance requirement
+            break;
+        case 2: // Savings Account
+            withdrawalFee = 2.00;
+            interestRate = 0.02;
+            minBalance = 1000.00; // Minimum balance requirement
+            break;
+        case 3: // Business Account
+            withdrawalFee = 5.00;
+            interestRate = 0.05;
+            minBalance = 10000.00; // Minimum balance requirement
+            break;
+        default:
+            cout << "Invalid Account Type. Please Re-enter The Correct Account." << endl;
+            return;
+    }
 }
