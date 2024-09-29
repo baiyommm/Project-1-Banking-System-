@@ -1,14 +1,16 @@
-//
-//  main.cpp
-//  Project 1 (Banking System)
-//
-//  Created by Chatchapong Thuaypha on 9/26/24.
-//
+#include <iostream> // Input and Output
+#include <ctime> // Time Function
+#include <cstdlib> // Random Number Generator
+#include <string> // Arrays and Characters
+#include <iomanip> // Formatting
+using namespace std;
 
-#include <iostream>
+int main() {
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    // code for random number generator
+    srand(static_cast<unsigned int>(time(0)));
+    
+    
+    
     return 0;
 }
