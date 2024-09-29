@@ -10,6 +10,9 @@ int main() {
     // code for random number generator
     srand(static_cast<unsigned int>(time(0)));
     
+    time_t now = time(0); // function to get the current system time (time is in seconds)
+    char* dt = ctime(&now); // converts the time to a string (readable format) stores the time(0) data into dt
+    
     int accountType;
     double balance;
     
