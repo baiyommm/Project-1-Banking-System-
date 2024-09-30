@@ -8,6 +8,9 @@ using namespace std;
 // Function Header to print out the deposits
 void deposit(double &balance, double amount);
 
+// Boolean Function to handle withdrawals along with fees depending on the account type
+bool withdraw(double &balance, double amount, double fee);
+
 // Function Header for various Bank Accounts: Checking vs Savings vs Business
 void handleAccount(int accountType, double &balance);
 
@@ -42,6 +45,20 @@ void deposit(double &balance, double amount) {
     }
     else {
         cout << "Invalid Deposit Amount." << endl;
+    }
+}
+
+// Function to handle withdrawals with fees associated with the account type
+bool withdraw(double &balance, double amount, double fee) {
+    if (amount > 0 && amount + fee <= balance) {
+        balance -= (amount + fee);
+ //       logTransaction("Withdrawal", amount); // for future reference: logTransaction function to print log
+        cout << "You Withdrew $" << amount << " with fee $" << fee << ".\n The New balance Is: $" << balance << "." << endl;
+        return true;
+    } 
+    else {
+        cout << "Invalid or Insufficient Funds." << endl;
+        return false;
     }
 }
 
