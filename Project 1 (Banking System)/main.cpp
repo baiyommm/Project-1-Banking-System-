@@ -5,6 +5,12 @@
 #include <iomanip> // Formatting
 using namespace std;
 
+// Function Header to the Log Transaction
+void logTransaction(string type, double amount);
+
+// Function Header for printing the Transaction History Log
+void printTransactionHistory();
+    
 // Function Header to print out the deposits
 void deposit(double &balance, double amount);
 
@@ -24,9 +30,6 @@ int main() {
     // code for random number generator
     srand(static_cast<unsigned int>(time(0)));
     
-    time_t now = time(0); // function to get the current system time (time is in seconds)
-    char* dt = ctime(&now); // converts the time to a string (readable format) stores the time(0) data into dt
-    
     int accountType;
     double balance;
     
@@ -37,6 +40,38 @@ int main() {
     cin >> balance;
     
     return 0;
+}
+
+const int max_transactions = 100; // Max number of transactions that can be logged
+
+// Arrays to store transaction details (History Log)
+string transactionType[max_transactions];
+double transactionAmount[max_transactions];
+string transactionDate[max_transactions];
+int transactionCount = 0;
+
+// Function to log transactions
+void logTransaction(string type, double amount) {
+    if (transactionCount < max_transactions) {
+        time_t now = time(0); // function to get the current system time (time is in seconds)
+        char* dt = ctime(&now); // converts time to a string (readable format), stores the time(0) data into dt
+        transactionType[transactionCount] = type;
+        transactionAmount[transactionCount] = amount;
+        transactionDate[transactionCount] = dt;
+        transactionCount++;
+    } else {
+        cout << "Transaction log is full!\n";
+    }
+}
+
+// Function to print transaction history
+void printTransactionHistory() {
+    cout << "Transaction History: " << endl;
+    for (int i = 0; i < transactionCount; i++) {
+        cout << "Type: " << transactionType[i]
+             << ", Amount: $" << fixed << setprecision(2) << transactionAmount[i] // dollar amount (2 decimals)
+             << ", Date: " << transactionDate[i];
+    }
 }
 
 // Function to print out the deposits and log the deposit transaction.
