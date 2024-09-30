@@ -14,6 +14,11 @@ bool withdraw(double &balance, double amount, double fee);
 // Function Header for various Bank Accounts: Checking vs Savings vs Business
 void handleAccount(int accountType, double &balance);
 
+// Function to calculate interest
+double calculateInterest(double balance, double interestRate) {
+    return balance * interestRate;
+}
+
 int main() {
 
     // code for random number generator
