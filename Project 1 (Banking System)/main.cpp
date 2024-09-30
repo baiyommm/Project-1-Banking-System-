@@ -5,22 +5,29 @@
 #include <iomanip> // Formatting
 using namespace std;
 
-// Function Header to the Log Transaction
+// Global Arrays to store transaction details (History Log)
+const int max_transactions = 100; // Max number of transactions that can be logged (const int)
+string transactionType[max_transactions];
+double transactionAmount[max_transactions];
+string transactionDate[max_transactions];
+int transactionCount = 0; // starts at 0
+
+// [Prototype] Function Declaration to the Log Transaction
 void logTransaction(string type, double amount);
 
-// Function Header for printing the Transaction History Log
+// [Prototype] Function Declaration for printing the Transaction History Log
 void printTransactionHistory();
     
-// Function Header to print out the deposits
+// [Prototype] Function Declaration to print out the deposits
 void deposit(double &balance, double amount);
 
-// Boolean Function to handle withdrawals along with fees depending on the account type
+// [Prototype] Function Declaration (Boolean) to handle withdrawals along with fees depending on the account type
 bool withdraw(double &balance, double amount, double fee);
 
-// Function Header for various Bank Accounts: Checking vs Savings vs Business
+// [Prototype] Function Declaration for various Bank Accounts: Checking vs Savings vs Business
 void handleAccount(int accountType, double &balance);
 
-// Function to calculate interest
+// Function to calculate interest (formula)
 double calculateInterest(double balance, double interestRate) {
     return balance * interestRate;
 }
@@ -42,14 +49,6 @@ int main() {
     return 0;
 }
 
-const int max_transactions = 100; // Max number of transactions that can be logged
-
-// Arrays to store transaction details (History Log)
-string transactionType[max_transactions];
-double transactionAmount[max_transactions];
-string transactionDate[max_transactions];
-int transactionCount = 0;
-
 // Function to log transactions
 void logTransaction(string type, double amount) {
     if (transactionCount < max_transactions) {
@@ -59,7 +58,8 @@ void logTransaction(string type, double amount) {
         transactionAmount[transactionCount] = amount;
         transactionDate[transactionCount] = dt;
         transactionCount++;
-    } else {
+    } 
+    else {
         cout << "Transaction log is full!\n";
     }
 }
