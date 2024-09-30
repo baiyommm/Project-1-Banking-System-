@@ -5,6 +5,9 @@
 #include <iomanip> // Formatting
 using namespace std;
 
+// Function Header to print out the deposits
+void deposit(double &balance, double amount);
+
 // Function Header for various Bank Accounts: Checking vs Savings vs Business
 void handleAccount(int accountType, double &balance);
 
@@ -26,6 +29,20 @@ int main() {
     cin >> balance;
     
     return 0;
+}
+
+// Function to print out the deposits and log the deposit transaction.
+void deposit(double &balance, double amount) {
+    if (amount > 0) {
+        balance += amount; // adds the amount to the balance
+   //     logTransaction("Deposit", amount); // for future reference: logTransaction function to print log
+        cout << "You Deposited: $" << amount << ".\n The New Balance Is: $" << balance << "." << endl;
+        // Random confirmation number (uses 1000000 to ensure random number doesn't go beyond 1 million)
+        cout << "Confirmation Number: " << rand() % 1000000 + 1 << endl; // uses +1 to ensure that result isn't 0
+    }
+    else {
+        cout << "Invalid Deposit Amount." << endl;
+    }
 }
 
     // Function for various Bank Accounts: Checking vs Savings vs Business
