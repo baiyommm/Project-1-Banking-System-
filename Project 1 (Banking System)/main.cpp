@@ -1,16 +1,8 @@
 #include <iostream> // Input and Output
 #include <ctime> // Time Function
 #include <cstdlib> // Random Number Generator
-#include <string> // Arrays and Characters
 #include <iomanip> // Formatting
 using namespace std;
-
-// Global Arrays to store transaction details (History Log)
-const int max_transactions = 100; // Max number of transactions that can be logged (const int)
-string transactionType[max_transactions];
-double transactionAmount[max_transactions];
-string transactionDate[max_transactions];
-int transactionCount = 0; // starts at 0
 
 // [Prototype] Function Declaration to the Log Transaction
 void logTransaction(string type, double amount);
@@ -21,16 +13,21 @@ void printTransactionHistory();
 // [Prototype] Function Declaration to print out the deposits
 void deposit(double &balance, double amount);
 
-// [Prototype] Function Declaration (Boolean) to handle withdrawals along with fees depending on the account type
+// [Prototype] Function Declaration (Boolean) to handle withdrawals along with fees depending on account type
 bool withdraw(double &balance, double amount, double fee);
 
 // [Prototype] Function Declaration for various Bank Accounts: Checking vs Savings vs Business
 void handleAccount(int accountType, double &balance);
 
-// Function to calculate interest (formula)
-double calculateInterest(double balance, double interestRate) {
-    return balance * interestRate;
-}
+// [Prototype] Function Declaration to calculate interest (formula)
+double calculateInterest(double balance, double interestRate);
+
+// Global Arrays to store transaction details (History Log)
+const int max_transactions = 100; // Max number of transactions that can be logged (const int cannot changed)
+string transactionType[max_transactions];
+double transactionAmount[max_transactions];
+string transactionDate[max_transactions];
+int transactionCount = 0; // starts at 0
 
 int main() {
 
@@ -45,6 +42,8 @@ int main() {
     
     cout << "Enter Initial Balance: ";
     cin >> balance;
+    
+    handleAccount(accountType, balance); // function to call on the accountType and balance
     
     return 0;
 }
@@ -78,8 +77,8 @@ void printTransactionHistory() {
 void deposit(double &balance, double amount) {
     if (amount > 0) {
         balance += amount; // adds the amount to the balance
-   //     logTransaction("Deposit", amount); // for future reference: logTransaction function to print log
-        cout << "You Deposited: $" << amount << ".\n The New Balance Is: $" << balance << "." << endl;
+        logTransaction("Deposit", amount); // for future reference: logTransaction function to print log
+        cout << "You Deposited: $" << amount << ".\nThe New Balance Is: $" << balance << "." << endl;
         // Random confirmation number (uses 1000000 to ensure random number doesn't go beyond 1 million)
         cout << "Confirmation Number: " << rand() % 1000000 + 1 << endl; // uses +1 to ensure that result isn't 0
     }
@@ -92,14 +91,20 @@ void deposit(double &balance, double amount) {
 bool withdraw(double &balance, double amount, double fee) {
     if (amount > 0 && amount + fee <= balance) {
         balance -= (amount + fee);
- //       logTransaction("Withdrawal", amount); // for future reference: logTransaction function to print log
-        cout << "You Withdrew $" << amount << " with fee $" << fee << ".\n The New balance Is: $" << balance << "." << endl;
+        logTransaction("Withdrawal", amount); // for future reference: logTransaction function to print log
+        cout << "You Withdrew $" << amount << " with fee $" << fee << ".\nThe New balance Is: $" << balance << "." << endl;
+        cout << "Confirmation Number: " << rand() % 1000000 + 1 << endl; // uses +1 to ensure that result
         return true;
     } 
     else {
         cout << "Invalid or Insufficient Funds." << endl;
         return false;
     }
+}
+
+// Function to calculate interest (formula)
+double calculateInterest(double balance, double interestRate) {
+    return balance * interestRate;
 }
 
     // Function for various Bank Accounts: Checking vs Savings vs Business
@@ -130,4 +135,33 @@ void handleAccount(int accountType, double &balance) {
             cout << "Invalid Account Type. Please Re-enter The Correct Account." << endl;
             return;
     }
+
+int choice;
+do {
+    cout << "\n1. Deposit\n2. Withdraw\n3. Transaction History\n4. View Balance\n5. Calculate Interest\n6. Exit\n";
+    cout << "Choose an option: ";
+    cin >> choice;
+
+    switch (choice) {
+    case 1:
+        cout << "Enter deposit amount: ";
+        cin >> amount;
+        deposit(balance, amount);
+        break;
+    case 2:
+        cout << "Enter withdrawal amount: ";
+        cin >> amount;
+        withdraw(balance, amount, withdrawalFee);
+        break;
+    case 3:
+        printTransactionHistory();
+        break;
+    case 4:
+        cout << "Current Balance: $" << fixed << setprecision(2) << balance << endl;
+        break;
+    case 5:
+        cout << "Interest earned: $" << fixed << setprecision(2) << calculateInterest(balance, interestRate) << endl;
+        break;
+    }
+} while (choice != 6);
 }
