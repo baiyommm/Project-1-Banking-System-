@@ -21,3 +21,10 @@ This program completes the the necessary objective of the assignment by implemen
  - Standard library use
  - Random number function, used to print the confirmation number in each transaction
  - Correct use of booleans, arrays, loops, nested loops, use of namespace, functions, and handling edge cases.
+
+Video Link on Youtube:
+https://youtu.be/2F7Xm-9SrYI
+
+Screenshots
+<img width="446" alt="Screenshot 2024-09-30 at 10 26 41 PM" src="https://github.com/user-attachments/assets/03bed3aa-e86c-4015-9928-4c2e49366b82">
+<img width="588" alt="Screenshot 2024-09-30 at 10 30 17 PM" src="https://github.com/user-attachments/assets/8aa1c4d5-c34e-4e79-bcbd-814c1e05dee2">
